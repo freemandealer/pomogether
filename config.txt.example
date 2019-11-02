@@ -1,0 +1,6 @@
+ --user_name=xxx
+ --partner_name=yyy
+ --server_url=http://aa.bb.cc.dd:8081/testdb
+ --fullscreen_quitable=True
+ --debug_mode=True
+ --notice_interval=25,5,5
