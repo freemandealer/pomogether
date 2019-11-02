@@ -3,4 +3,9 @@
  --server_url=http://aa.bb.cc.dd:8081/testdb
  --fullscreen_quitable=True
  --debug_mode=True
- --notice_interval=25,5,5
+# force break at 25 min, strict pomodoro technique
+#--notice_interval=25
+#notice when working for 25 min, then force break 5 min later - pomodora variation
+ --notice_interval=25,5
+#notice when working for 25, 30, 40 min, then force at 50 min later - flowtime technique
+#--notice_interval=25,5,10,10
