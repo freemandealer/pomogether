@@ -44,5 +44,5 @@ if __name__ == "__main__":
     tasklist.add_task('我觉得很好\n')
     l = tasklist.get_tasklist()
     for each in l:
-        print each
+        print(each)
 

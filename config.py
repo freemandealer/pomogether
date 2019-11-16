@@ -17,10 +17,10 @@ gflags.DEFINE_list('notice_interval', '25,5', 'notice interval')
 
 if __name__ == "__main__":
     Flags(sys.argv)
-    print 'current settings:'
-    print 'user name: '     + Flags.user_name
-    print 'partner name: '  + Flags.partner_name
-    print 'server url: '    + Flags.server_url
-    print 'fullscreen quitable: ' + str(Flags.fullscreen_quitable)
-    print 'debug mode: '    + str(Flags.debug_mode)
-    print 'notice interval: ' + str(Flags.notice_interval)
+    print('current settings:')
+    print('user name: '     + Flags.user_name)
+    print('partner name: '  + Flags.partner_name)
+    print('server url: '    + Flags.server_url)
+    print('fullscreen quitable: ' + str(Flags.fullscreen_quitable))
+    print('debug mode: '    + str(Flags.debug_mode))
+    print('notice interval: ' + str(Flags.notice_interval))

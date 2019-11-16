@@ -49,12 +49,12 @@ def yesNoMsgBox(s=None):
 
 
 if __name__ == "__main__":
-    print _whatAreYouDoing('''
+    print(_whatAreYouDoing('''
     make your choice:
     1: apple
     2: banana
     3: android
 
     leave blank if same as last 
-    ''')
+    '''))
 

@@ -53,9 +53,9 @@ def get_task_length_today():
 
 
 if __name__ == '__main__':
-    print get_total_work_length_today()
-    print get_total_break_length_today()
+    print(get_total_work_length_today())
+    print(get_total_break_length_today())
     ret = get_task_length_today()
     for key,val in ret.items():
-        print key
+        print(key)
 
