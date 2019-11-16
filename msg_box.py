@@ -37,11 +37,10 @@ def _whatAreYouDoing(prompt):
     return answer
 
 
-def yesNoMsgBox(s=None):
+def yesNoMsgBox(s, timeout):
     ret = os.system(\
             "osascript -e 'Tell application \"System Events\" to display dialog \""\
-            +s+"\" giving up after 19'") # giving up time should be less than fullscreen time
-                                         # to avoid msgbox choise affects next round
+            +s+"\" giving up after " + str(timeout) +"'")
     if ret == 0:
         return True
     else:

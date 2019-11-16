@@ -57,12 +57,12 @@ class Pomodoro(rumps.App):
         self.work_menu.set_callback(self.work)
         self.time_idx = 0
 
-        ## ask for another round
-        #choice = msg_box.yesNoMsgBox('Have a rest and then click OK to start next period.')
-        #if choice == True:
-        #    self.work(None)
-        #else:
-        #    exit()
+        # ask for another round
+        choice = msg_box.yesNoMsgBox('click OK to work for another round', 3600)
+        if choice == True:
+            self.work(None)
+        else:
+            exit()
 
 
     def timerAction(self):
@@ -82,7 +82,7 @@ class Pomodoro(rumps.App):
 
 
     def notifyRest(self):
-        choice = msg_box.yesNoMsgBox('do you want to cont?')
+        choice = msg_box.yesNoMsgBox('do you want to cont?', 20)
         if choice == True:
             return True
         elif choice == False:
