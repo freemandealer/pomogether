@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
-import gflags
+from absl import flags
 from config import *
 import time
 import random
@@ -11,8 +11,8 @@ import json
 from time import *
 import paths
 
-gflags.DEFINE_boolean('quitable', True, 'quitable')
-gflags.DEFINE_integer('time', 20, 'time')
+flags.DEFINE_boolean('quitable', True, 'quitable')
+flags.DEFINE_integer('time', 20, 'time')
 ptext.DEFAULT_FONT_NAME = "data/Roboto-Light.ttf"
 
 
@@ -35,12 +35,12 @@ def get_info(who):
 
     s += '\nWorkLength: '
     wl = data['WorkLength']
-    for i in range(0, wl/5):
+    for i in range(0, int(wl/5)):
         s += '|'
     s += str(wl)
     s += '\nBreakLength: '
     bl = data['BreakLength']
-    for i in range(0, bl/5):
+    for i in range(0, int(bl/5)):
         s += '|'
     s += str(bl)
 

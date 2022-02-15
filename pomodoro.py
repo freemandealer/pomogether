@@ -47,7 +47,7 @@ class Pomodoro(rumps.App):
         show_off.download_show_off_file(Flags.partner_name)
 
         ## using subprocess instead of function call to avoid OSX bug
-        cmd = 'python fullscreen.py --time=20 --quitable=' + str(Flags.fullscreen_quitable) + ' --flagfile=./config.txt'
+        cmd = 'python3 fullscreen.py --time=20 --quitable=' + str(Flags.fullscreen_quitable) + ' --flagfile=./config.txt'
         logging.info(cmd)
         os.system(cmd)
 

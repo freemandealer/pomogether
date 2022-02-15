@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import logging
-import gflags
 from config import *
 import sys
 from pomodoro import *
