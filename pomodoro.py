@@ -18,7 +18,9 @@ class Pomodoro(rumps.App):
         super(Pomodoro, self).__init__("20Twenty20",icon="data/icon.tiff")
         self.work_menu = rumps.MenuItem("work", callback=self.work)
         self.rest_menu = rumps.MenuItem("rest",callback=None)
-        self.menu = [self.work_menu, self.rest_menu, None]
+        self.task_menu = rumps.MenuItem("task",callback=self.task)
+        self.records_menu = rumps.MenuItem("records",callback=self.records)
+        self.menu = [self.work_menu, self.rest_menu, self.task_menu, self.records_menu, None]
         self.alarm_time = [int(i) * 60 for i in Flags.notice_interval]
         self.time_idx = 0
         self.mainloopStart()
@@ -63,6 +65,20 @@ class Pomodoro(rumps.App):
             self.work(None)
         else:
             exit()
+
+
+    def task(self,_):
+        logging.info('edit task')
+        cmd = 'open ' + str(paths.tasklist_path) + ' -a TextEdit'
+        logging.info(cmd)
+        os.system(cmd)
+
+
+    def records(self,_):
+        logging.info('show records')
+        cmd = 'open ' + str(paths.tracking_dir)
+        logging.info(cmd)
+        os.system(cmd)
 
 
     def timerAction(self):
