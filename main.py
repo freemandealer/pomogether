@@ -1,13 +1,17 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import logging
-from config import *
+import os
 import sys
+from config import *
 from pomodoro import *
 
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
 def main(argv):
-    argv.append('--flagfile=./config.txt')
+    argv.append('--flagfile=' + os.path.join(BASE_DIR, 'config.txt'))
     Flags(argv)
     logging.basicConfig(level=logging.DEBUG,
                 format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
@@ -20,4 +24,3 @@ def main(argv):
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
-

@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 import logging
-from config import *
-import rumps
 import os
-import schedule
-from time import *
+import subprocess
+import sys
 import threading
+from time import *
+
+import rumps
+import schedule
+from config import *
+
 import msg_box
 import fullscreen
-import show_off
 import paths
+import show_off
 from time_tracker import *
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 class Pomodoro(rumps.App):
@@ -45,13 +52,19 @@ class Pomodoro(rumps.App):
         tracker.start_break()
 
         show_off.create_show_off_file()
-        show_off.upload_show_off_file(Flags.user_name)
-        show_off.download_show_off_file(Flags.partner_name)
+        #show_off.upload_show_off_file(Flags.user_name)
+        #show_off.download_show_off_file(Flags.partner_name)
 
-        ## using subprocess instead of function call to avoid OSX bug
-        cmd = 'python3 fullscreen.py --time=20 --quitable=' + str(Flags.fullscreen_quitable) + ' --flagfile=./config.txt'
-        logging.info(cmd)
-        os.system(cmd)
+        # Keep the fullscreen subprocess on the same interpreter as the menu bar app.
+        cmd = [
+            sys.executable,
+            os.path.join(BASE_DIR, 'fullscreen.py'),
+            '--time=20',
+            '--quitable=' + str(Flags.fullscreen_quitable),
+            '--flagfile=' + os.path.join(BASE_DIR, 'config.txt'),
+        ]
+        logging.info('launch fullscreen with %s', cmd)
+        subprocess.call(cmd)
 
 
         self.rest_menu.set_callback(None)
@@ -118,4 +131,3 @@ class Pomodoro(rumps.App):
 
 if __name__ == "__main__":
     Pomodoro().run()
-

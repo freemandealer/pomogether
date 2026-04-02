@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
+import os
 from absl import flags
 from config import *
 import time
@@ -10,27 +11,58 @@ import pygame
 import json
 from time import *
 import paths
+import track_parser
 
 flags.DEFINE_boolean('quitable', True, 'quitable')
 flags.DEFINE_integer('time', 20, 'time')
 ptext.DEFAULT_FONT_NAME = "data/Roboto-Light.ttf"
 
 
-def get_info(who):
-    s = ''
-    if who == 'user':
-        s = Flags.user_name
-        show_off_file = paths.user_showoff_path
-    elif who == 'partner':
-        s = Flags.partner_name
-        show_off_file = paths.partner_showoff_path
+def get_local_slogan():
+    if not os.path.exists(paths.slogan_path):
+        return ''
 
+    try:
+        fd = open(paths.slogan_path, 'r')
+        slogan = fd.read()
+        fd.close()
+        return slogan
+    except Exception:
+        logging.exception('error to open local slogan file')
+        return ''
+
+
+def get_local_user_data():
+    return {
+        'WorkLength': track_parser.get_total_work_length_today(),
+        'BreakLength': track_parser.get_total_break_length_today(),
+        'Tasks': track_parser.get_task_length_today(),
+        'slogan': get_local_slogan(),
+    }
+
+
+def load_show_off_file(show_off_file, who):
     try:
         fd = open(show_off_file, 'r')
         data = json.loads(fd.read())
         fd.close()
-    except:
-        logging.error('error to parse show off json file of ' + who)
+        return data
+    except Exception:
+        logging.exception('error to parse show off json file of %s', who)
+        return None
+
+
+def get_info(who):
+    s = ''
+    if who == 'user':
+        s = Flags.user_name
+        data = get_local_user_data()
+    elif who == 'partner':
+        s = Flags.partner_name
+        show_off_file = paths.partner_showoff_path
+        data = load_show_off_file(show_off_file, who)
+
+    if data is None:
         return s
 
     s += '\nWorkLength: '
